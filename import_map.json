@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "~/": "./src/",
+    "std/": "https://deno.land/std@0.117.0/",
+    "preact": "https://esm.sh/preact"
+  }
+}
