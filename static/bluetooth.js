@@ -10,16 +10,14 @@ const Characteristics = {
 };
 
 const Commands = {
-  POWER_ON: Uint8Array.of(0x78, 0x81, 0x01, 0x01, 0xFB),
-  POWER_OFF: Uint8Array.of(0x78, 0x81, 0x01, 0x02, 0xFC),
+  POWER_ON: Uint8Array.of(0x78, 0x81, 0x01, 0x01, 0xfb),
+  POWER_OFF: Uint8Array.of(0x78, 0x81, 0x01, 0x02, 0xfc),
 };
 
 const bufferToString = (buf) =>
-  `[ ${
-    [...new Uint8Array(buf)]
-      .map((n) => n.toString(16).padStart(2, "0"))
-      .join(" ")
-  } ]`;
+  `[ ${[...new Uint8Array(buf)]
+    .map((n) => n.toString(16).padStart(2, "0"))
+    .join(" ")} ]`;
 
 const logAllCharacteristics = async (gattServer) => {
   for (const serviceId of Object.values(Services)) {
@@ -29,7 +27,7 @@ const logAllCharacteristics = async (gattServer) => {
       for (const characteristic of await service.getCharacteristics()) {
         console.log(
           characteristic.uuid,
-          bufferToString((await characteristic.readValue()).buffer),
+          bufferToString((await characteristic.readValue()).buffer)
         );
       }
     } catch {
@@ -41,6 +39,7 @@ const logAllCharacteristics = async (gattServer) => {
 };
 
 const getBluetoothDevices = async () => {
+  console.log({ bluetooth: navigator.bluetooth });
   const device = await navigator.bluetooth.requestDevice({
     filters: [{ namePrefix: "NEEWER" }],
     optionalServices: Object.values(Services),
@@ -52,7 +51,7 @@ const getBluetoothDevices = async () => {
 
   const service = await server.getPrimaryService(Services.CONTROL);
   const characteristic = await service.getCharacteristic(
-    Characteristics.CONTROL,
+    Characteristics.CONTROL
   );
   await characteristic.writeValue(Commands.POWER_OFF);
   console.log(bufferToString((await characteristic.readValue()).buffer));
@@ -61,7 +60,6 @@ const getBluetoothDevices = async () => {
   console.log(bufferToString((await characteristic.readValue()).buffer));
 };
 
-document.querySelector("#add-device").addEventListener(
-  "click",
-  getBluetoothDevices,
-);
+document
+  .querySelector("#add-device")
+  .addEventListener("click", getBluetoothDevices);
