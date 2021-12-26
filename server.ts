@@ -18,7 +18,6 @@ const EXT_MIMETYPES = {
 };
 
 const bundle = async (path: string) => {
-  return;
   const importMap = JSON.parse(await Deno.readTextFile("./import_map.json"));
 
   const { files } = await Deno.emit(path, {
@@ -39,7 +38,11 @@ const bundle = async (path: string) => {
 const watchBundle = async (path: string) => {
   bundle(path);
   for await (const _ of Deno.watchFs(dirname(path))) {
-    bundle(path);
+    try {
+      bundle(path);
+    } catch (e) {
+      console.error(e);
+    }
   }
 };
 
