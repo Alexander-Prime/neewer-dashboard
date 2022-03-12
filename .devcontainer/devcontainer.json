@@ -1,0 +1,10 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "extensions": [
+    "denoland.vscode-deno",
+    "eamodio.gitlens"
+  ],
+  "remoteUser": "deno"
+}
