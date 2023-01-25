@@ -1,7 +1,0 @@
-{
-  "compilerOptions": {
-    "lib": ["deno.window", "dom"],
-    "jsx": "react-jsx",
-    "jsxImportSource": "https://esm.sh/preact"
-  }
-}
