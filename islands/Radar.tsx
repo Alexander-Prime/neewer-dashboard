@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import Light from "../components/Light.tsx";
+import Light from "~/components/Light.tsx";
 
 type Props = {
   className?: string;

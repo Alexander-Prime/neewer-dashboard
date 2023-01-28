@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import Radar from "../islands/Radar.tsx";
+import Radar from "~/islands/Radar.tsx";
 
 export default () => (
   <>
