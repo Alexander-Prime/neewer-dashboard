@@ -1,0 +1,29 @@
+.Button {
+  color: var(--white);
+  background: #404040;
+
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 8px;
+  align-items: center;
+
+  padding: 0 16px;
+  height: 48px;
+
+  border: none;
+  border-radius: 24px;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.Button.mod-icon {
+  padding-left: 12px;
+}
+
+.Button-icon {
+  fill: var(--white);
+  width: 1.5rem;
+  height: 1.5rem;
+}
