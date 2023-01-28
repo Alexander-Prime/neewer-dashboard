@@ -1,13 +1,21 @@
-import { nanoid } from "https://deno.land/x/nanoid@v3.0.0/mod.ts";
-import { Signal, signal } from "@preact/signals";
+import classNames from "classnames";
+import { lights } from "~/signals/lights.ts";
+import Icon from "./Icon.tsx";
 
-type Point = { x: number; y: number };
+type Props = {
+  className?: string;
+  id: string;
+};
 
-const coords: Record<string, Signal<Point>> = {};
-export const dragTarget = signal<string | null>(null);
-
-const id = nanoid();
-
-export default () => (
-  <div onPointerDown={console.log} onPointerUp={console.log}>{id}</div>
+export default ({ className, id }: Props) => (
+  <div
+    className={classNames("Light", className)}
+    id={`light-${id}`}
+    style={{
+      left: lights.value[id]?.position.x,
+      top: lights.value[id]?.position.y,
+    }}
+  >
+    <Icon name="bulb" />
+  </div>
 );

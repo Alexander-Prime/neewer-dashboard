@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,700&display=swap');
 
+@import url('./Radar.css');
+@import url('./Light.css');
+
 :root {
   --white: #ffffff;
   --gray100: #e8e8e8;
   --gray200: #d1d1d1;
   --gray300: #b8b8b8;
   --black: #000000;
+
+  --black-a12: rgba(0, 0, 0, 0.12);
 }
 
 html {
