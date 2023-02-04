@@ -1,8 +1,11 @@
+import { nanoid } from "https://deno.land/x/nanoid@v3.0.0/mod.ts";
+
 import { useCallback, useState } from "preact/hooks";
 
 import Button from "~/components/Button.tsx";
 import Modal from "~/components/Modal.tsx";
 import { getBluetoothDevices } from "~/utils/bluetooth.ts";
+import { lights } from "~/signals/lights.ts";
 
 export default () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -19,6 +22,14 @@ export default () => {
     setModalVisible,
   ]);
 
+  const onCreateTestLight = useCallback(() => {
+    lights.value = [...lights.value, {
+      ref: nanoid(),
+      position: { x: 0.5, y: 0.5 },
+    }];
+    setModalVisible(false);
+  }, [lights.value, setModalVisible]);
+
   return (
     <>
       <Button iconName="add" onClick={onClick}>Add light</Button>
@@ -32,7 +43,12 @@ export default () => {
           supports Web Bluetooth.
         </p>
         <p>You can add a test light that doesn't control a physical device.</p>
-        <Button iconName="add">Add Test Light</Button>
+        <Button
+          iconName="add"
+          onClick={onCreateTestLight}
+        >
+          Add Test Light
+        </Button>
       </Modal>
     </>
   );

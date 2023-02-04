@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import Light from "~/components/Light.tsx";
-import { lights } from "../signals/lights.ts";
+import { lights } from "~/signals/lights.ts";
 
 type Props = {
   className?: string;
@@ -8,6 +8,6 @@ type Props = {
 
 export default ({ className }: Props) => (
   <div className={classNames("Radar", className)}>
-    {Object.keys(lights.value).map((id) => <Light id={id} />)}
+    {lights.value.map(({ ref }) => <Light id={ref} />)}
   </div>
 );

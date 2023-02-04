@@ -67,7 +67,7 @@ const logAllCharacteristics = async (gattServer: Server) => {
   }
 };
 
-export const getBluetoothDevices = async () => {
+export const getBluetoothDevices = async (): Promise<LightDevice[]> => {
   if (!navigator.bluetooth) {
     throw new Error("Can't access bluetooth API");
   }
@@ -89,4 +89,23 @@ export const getBluetoothDevices = async () => {
   await new Promise((res) => setTimeout(res, 1000));
   await characteristic.writeValue(Commands.POWER_ON);
   console.log(bufferToString((await characteristic.readValue()).buffer));
+
+  return [];
+};
+
+export type LightDevice = {
+  id: string;
+  getProperties: () => Promise<unknown[]>;
+};
+
+export const LightDevice = {
+  fromRef: (ref: string): LightDevice => ({
+    id: ref,
+    getProperties: ref.startsWith("test")
+      ? () => Promise.resolve([])
+      : async () => {
+        await null;
+        return [];
+      },
+  }),
 };
