@@ -8,6 +8,11 @@ type Props = {
 
 export default ({ className }: Props) => (
   <div className={classNames("Radar", className)}>
+    <svg className="Radar-background">
+      <circle className="Radar-background-outer" />
+      <circle className="Radar-background-middle" />
+      <circle className="Radar-background-inner" />
+    </svg>
     {lights.value.map(({ ref, position: { x, y } }) => (
       <div
         className="Radar-lightPositionWrapper"
