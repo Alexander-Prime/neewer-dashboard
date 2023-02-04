@@ -8,6 +8,13 @@ type Props = {
 
 export default ({ className }: Props) => (
   <div className={classNames("Radar", className)}>
-    {lights.value.map(({ ref }) => <Light id={ref} />)}
+    {lights.value.map(({ ref, position: { x, y } }) => (
+      <div
+        className="Radar-lightPositionWrapper"
+        style={{ left: `calc(${x} * 100%)`, top: `calc(${y} * 100%)` }}
+      >
+        <Light id={ref} />
+      </div>
+    ))}
   </div>
 );
