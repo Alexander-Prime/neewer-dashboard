@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-@import url('./Button.css');
-@import url('./Icon.css');
-@import url('./Light.css');
-@import url('./Radar.css');
+@import url('./components/Button.css');
+@import url('./components/Icon.css');
+@import url('./components/Light.css');
+@import url('./components/Modal.css');
+@import url('./components/Radar.css');
+
+@import url('./islands/AddLightButton.css');
 
 :root {
   --white: #ffffff;

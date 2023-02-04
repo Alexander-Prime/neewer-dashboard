@@ -1,0 +1,13 @@
+.AddLightButton-errorModal {
+  max-width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+
+  text-align: center;
+
+  color: red;
+}
