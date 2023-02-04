@@ -1,3 +1,30 @@
+declare global {
+  interface Navigator {
+    bluetooth?: {
+      requestDevice: (
+        _: { filters: unknown[]; optionalServices: unknown[] },
+      ) => Promise<BluetoothDevice>;
+    };
+  }
+}
+
+type BluetoothDevice = {
+  gatt: Gatt;
+};
+
+type Gatt = { connect: () => Promise<Server> };
+type Server = { getPrimaryService: (_: unknown) => Promise<Service> };
+type Service = {
+  uuid: string;
+  getCharacteristics: () => Promise<Characteristic[]>;
+  getCharacteristic: (_: unknown) => Promise<Characteristic>;
+};
+type Characteristic = {
+  uuid: string;
+  writeValue: (_: unknown) => Promise<void>;
+  readValue: () => Promise<{ buffer: ArrayBufferLike }>;
+};
+
 const Services = {
   UNKNOWN_A: 0x1800,
   UNKNOWN_B: 0x1801,
@@ -14,12 +41,14 @@ const Commands = {
   POWER_OFF: Uint8Array.of(0x78, 0x81, 0x01, 0x02, 0xfc),
 };
 
-const bufferToString = (buf) =>
-  `[ ${[...new Uint8Array(buf)]
-    .map((n) => n.toString(16).padStart(2, "0"))
-    .join(" ")} ]`;
+const bufferToString = (buf: ArrayBufferLike) =>
+  `[ ${
+    [...new Uint8Array(buf)]
+      .map((n) => n.toString(16).padStart(2, "0"))
+      .join(" ")
+  } ]`;
 
-const logAllCharacteristics = async (gattServer) => {
+const logAllCharacteristics = async (gattServer: Server) => {
   for (const serviceId of Object.values(Services)) {
     const service = await gattServer.getPrimaryService(serviceId);
     console.group(`Service ${service.uuid}`);
@@ -27,7 +56,7 @@ const logAllCharacteristics = async (gattServer) => {
       for (const characteristic of await service.getCharacteristics()) {
         console.log(
           characteristic.uuid,
-          bufferToString((await characteristic.readValue()).buffer)
+          bufferToString((await characteristic.readValue()).buffer),
         );
       }
     } catch {
@@ -38,8 +67,10 @@ const logAllCharacteristics = async (gattServer) => {
   }
 };
 
-const getBluetoothDevices = async () => {
-  console.log({ bluetooth: navigator.bluetooth });
+export const getBluetoothDevices = async () => {
+  if (!navigator.bluetooth) {
+    throw new Error("Can't access bluetooth API");
+  }
   const device = await navigator.bluetooth.requestDevice({
     filters: [{ namePrefix: "NEEWER" }],
     optionalServices: Object.values(Services),
@@ -51,7 +82,7 @@ const getBluetoothDevices = async () => {
 
   const service = await server.getPrimaryService(Services.CONTROL);
   const characteristic = await service.getCharacteristic(
-    Characteristics.CONTROL
+    Characteristics.CONTROL,
   );
   await characteristic.writeValue(Commands.POWER_OFF);
   console.log(bufferToString((await characteristic.readValue()).buffer));
@@ -59,7 +90,3 @@ const getBluetoothDevices = async () => {
   await characteristic.writeValue(Commands.POWER_ON);
   console.log(bufferToString((await characteristic.readValue()).buffer));
 };
-
-document
-  .querySelector("#add-device")
-  .addEventListener("click", getBluetoothDevices);
