@@ -1,5 +1,6 @@
 import { nanoid } from "https://deno.land/x/nanoid@v3.0.0/mod.ts";
 
+import classNames from "classnames";
 import { useCallback, useState } from "preact/hooks";
 
 import Button from "~/components/Button.tsx";
@@ -7,7 +8,11 @@ import Modal from "~/components/Modal.tsx";
 import { getBluetoothDevices } from "~/utils/bluetooth.ts";
 import { lights } from "~/signals/lights.ts";
 
-export default () => {
+type Props = {
+  className?: string;
+};
+
+export default ({ className }: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const onClick = useCallback(async () => {
@@ -32,7 +37,13 @@ export default () => {
 
   return (
     <>
-      <Button iconName="add" onClick={onClick}>Add light</Button>
+      <Button
+        className={classNames("AddLightButton", className)}
+        iconName="add"
+        onClick={onClick}
+      >
+        Add light
+      </Button>
       <Modal
         className="AddLightButton-errorModal"
         visible={modalVisible}
