@@ -6,6 +6,7 @@
 @import url("./components/Modal.css");
 
 @import url("./islands/AddLightButton.css");
+@import url("./islands/LightSettings.css");
 @import url("./islands/Radar.css");
 
 :root {
@@ -32,6 +33,7 @@ html {
   font-size: inherit;
 }
 
+/* TODO Use grid areas to place children in specific cells */
 .Dashboard {
   display: grid;
   grid-template-rows: auto 48px;

@@ -28,16 +28,17 @@ export default ({ className }: Props) => {
   ]);
 
   const onCreateTestLight = useCallback(() => {
-    lights.value = [...lights.value, {
-      ref: nanoid(),
-      position: { x: 0.5, y: 0.5 },
-    }];
+    lights.value = {
+      ...lights.value,
+      [nanoid()]: { position: { x: 0.5, y: 0.5 } },
+    };
     setModalVisible(false);
   }, [lights.value, setModalVisible]);
 
   return (
     <>
       <Button
+        raised
         className={classNames("AddLightButton", className)}
         iconName="add"
         onClick={onClick}

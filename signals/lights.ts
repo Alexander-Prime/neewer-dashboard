@@ -6,9 +6,8 @@ export type Point = { x: number; y: number };
 
 export type Light = {
   position: Point;
-  ref: string;
 };
 
-export const lights = signal<Light[]>(store.get("lights") ?? []);
+export const lights = signal<Record<string, Light>>(store.get("lights") ?? {});
 
 effect(() => store.set("lights", lights.value));

@@ -1,0 +1,30 @@
+.LightSettings {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.LightSettings-card {
+  background: #404040;
+  color: white;
+  min-height: 33.333vh;
+  width: 100%;
+  max-width: 480px;
+}
+
+@media screen and (min-width: 480px) {
+  .LightSettings-card {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+}
+
+.LightSettings-card-header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}

@@ -1,7 +1,7 @@
 .Button {
-  color: var(--white);
-  background: #404040;
-
+  background: transparent;
+  color: inherit;
+  fill: inherit;
   display: flex;
   flex-flow: row nowrap;
   gap: 8px;
@@ -20,6 +20,17 @@
 
 .Button.mod-icon {
   padding-left: 12px;
+}
+
+.Button.mod-icon:not(.mod-text) {
+  padding-right: 12px;
+}
+
+.Button.mod-raised {
+  color: var(--white);
+  background: #404040;
+
+  box-shadow: 0 4px 12px var(--black-a12);
 }
 
 .Button-icon {
