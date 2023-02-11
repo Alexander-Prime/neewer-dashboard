@@ -6,6 +6,7 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  overflow: hidden;
 }
 
 .LightSettings-card {
@@ -14,6 +15,12 @@
   min-height: 33.333vh;
   width: 100%;
   max-width: 480px;
+  transition: transform 500ms;
+  transform: translateY(100%);
+}
+
+.LightSettings-card.is-visible {
+  transform: translateY(0);
 }
 
 @media screen and (min-width: 480px) {
