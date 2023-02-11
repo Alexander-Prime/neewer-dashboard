@@ -56,6 +56,7 @@ export default ({ className }: Props) => {
         </p>
         <p>You can add a test light that doesn't control a physical device.</p>
         <Button
+          raised
           iconName="add"
           onClick={onCreateTestLight}
         >
