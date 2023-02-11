@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default ({ className }: Props) => {
-  const timeoutHash = useSignal(location?.hash.slice(1));
+  const timeoutHash = useSignal(globalThis.location?.hash.slice(1));
   useEffect(() => {
     setTimeout(() => timeoutHash.value = hash.value, 1000);
   }, [

@@ -1,12 +1,14 @@
 import { effect, signal } from "@preact/signals";
 
-export const hash = signal(location?.hash.slice(1));
+export const hash = signal(globalThis.location?.hash.slice(1));
 
 addEventListener(
   "hashchange",
-  () => hash.value = location?.hash.slice(1),
+  () => hash.value = globalThis.location?.hash.slice(1),
 );
 
 effect(() => {
-  if (location) location.hash = `#${hash.value}`;
+  if (globalThis.location) {
+    globalThis.location.hash = `#${hash.value}`;
+  }
 });
