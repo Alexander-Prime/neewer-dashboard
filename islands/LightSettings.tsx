@@ -35,10 +35,10 @@ export default ({ className }: Props) => {
         </header>
         <ul className="LightSettings-card-controls">
           <li className="LightSettings-card-controls-item">
-            <Switch label="On / Off" />
+            <Switch label="On / Off" onChange={console.log} />
           </li>
           <li className="LightSettings-card-controls-item">
-            <Switch label="On / Off" />
+            <Switch label="On / Off" onChange={console.log} />
           </li>
         </ul>
       </div>

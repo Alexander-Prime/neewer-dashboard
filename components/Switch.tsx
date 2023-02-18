@@ -1,14 +1,17 @@
 import classNames from "classnames";
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 
 type Props = {
   className?: string;
-  checked?: boolean;
   label?: string;
+  onChange?: (checked: boolean) => void;
 };
 
-export default ({ className, label }: Props) => {
+export default ({ className, label, onChange }: Props) => {
   const [isChecked, setChecked] = useState(false);
+
+  useEffect(() => onChange?.(isChecked), [isChecked]);
+
   return (
     <label
       className={classNames("Switch", className)}
