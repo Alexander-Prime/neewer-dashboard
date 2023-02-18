@@ -4,6 +4,7 @@
 @import url("./components/Icon.css");
 @import url("./components/Light.css");
 @import url("./components/Modal.css");
+@import url("./components/Switch.css");
 
 @import url("./islands/AddLightButton.css");
 @import url("./islands/LightSettings.css");
@@ -14,14 +15,19 @@
   --gray100: #e8e8e8;
   --gray200: #d1d1d1;
   --gray300: #b8b8b8;
+  --gray500: #808080;
+  --gray700: #404040;
   --black: #000000;
 
   --black-a12: rgba(0, 0, 0, 0.12);
+  --white-a30: rgba(255, 255, 255, 0.3);
 }
 
 html {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
+
+  list-style: none;
 }
 
 * {
@@ -31,6 +37,8 @@ html {
 
   font-family: inherit;
   font-size: inherit;
+
+  list-style: inherit;
 }
 
 /* TODO Use grid areas to place children in specific cells */

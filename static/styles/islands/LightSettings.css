@@ -11,7 +11,7 @@
 }
 
 .LightSettings-card {
-  background: #404040;
+  background: var(--gray700);
   color: white;
   min-height: 33.333vh;
   width: 100%;
@@ -19,6 +19,8 @@
   transition: transform 500ms;
   transform: translateY(100%);
   pointer-events: all;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 .LightSettings-card.is-visible {
@@ -36,4 +38,11 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+}
+
+.LightSettings-card-controls {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 16px;
+  gap: 32px;
 }

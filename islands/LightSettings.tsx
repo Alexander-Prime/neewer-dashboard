@@ -4,6 +4,7 @@ import { useComputed, useSignal } from "@preact/signals";
 
 import { hash } from "~/signals/hash.ts";
 import Button from "~/components/Button.tsx";
+import Switch from "~/components/Switch.tsx";
 
 type Props = {
   className?: string;
@@ -32,6 +33,14 @@ export default ({ className }: Props) => {
           />
           <h1>{deferredHash.value}</h1>
         </header>
+        <ul className="LightSettings-card-controls">
+          <li className="LightSettings-card-controls-item">
+            <Switch label="On / Off" />
+          </li>
+          <li className="LightSettings-card-controls-item">
+            <Switch label="On / Off" />
+          </li>
+        </ul>
       </div>
     </div>
   );
