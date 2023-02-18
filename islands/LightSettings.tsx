@@ -5,6 +5,7 @@ import { useComputed, useSignal } from "@preact/signals";
 import { hash } from "~/signals/hash.ts";
 import Button from "~/components/Button.tsx";
 import Switch from "~/components/Switch.tsx";
+import Slider from "../components/Slider.tsx";
 
 type Props = {
   className?: string;
@@ -38,7 +39,7 @@ export default ({ className }: Props) => {
             <Switch label="On / Off" onChange={console.log} />
           </li>
           <li className="LightSettings-card-controls-item">
-            <Switch label="On / Off" onChange={console.log} />
+            <Slider label="Brightness" onChange={console.log} />
           </li>
         </ul>
       </div>
