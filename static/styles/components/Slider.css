@@ -1,0 +1,30 @@
+.Slider {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.Slider-input {
+  flex-grow: 1;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
+
+.Slider-input::-webkit-slider-runnable-track {
+  background: var(--track-background);
+  height: 20px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.Slider-input::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background-color: var(--gray100);
+  box-shadow: calc(-100vw - 10px) 0 0 100vw var(--fill-color);
+}

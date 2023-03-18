@@ -4,8 +4,11 @@ import { useCallback, useRef } from "preact/hooks";
 
 type Props = {
   className?: string;
+  fillColor?: string;
   label?: string;
   onChange?: (value: number) => void;
+  onInput?: (value: number) => void;
+  trackBackground?: string;
 };
 
 const useDelayedChange = <T extends unknown>(
@@ -36,8 +39,23 @@ const useDelayedChange = <T extends unknown>(
 const numericValue = (ev: JSX.TargetedEvent<EventTarget>) =>
   Number((ev.target as HTMLInputElement | null)?.value);
 
-export default ({ className, label, onChange }: Props) => {
+export default (
+  {
+    className,
+    fillColor = "var(--white-a30)",
+    label,
+    onChange,
+    onInput,
+    trackBackground = "var(--black-a12)",
+  }: Props,
+) => {
   const [setValue, flush] = useDelayedChange(onChange, 1000);
+
+  const innerOnInput = useCallback((ev: JSX.TargetedEvent<EventTarget>) => {
+    const value = numericValue(ev);
+    setValue(value);
+    onInput?.(value);
+  }, []);
 
   return (
     <label
@@ -47,8 +65,12 @@ export default ({ className, label, onChange }: Props) => {
       <input
         className="Slider-input"
         type="range"
-        onInput={(ev) => setValue(numericValue(ev))}
+        onInput={innerOnInput}
         onChange={(ev) => flush(numericValue(ev))}
+        style={{
+          "--fill-color": fillColor,
+          "--track-background": trackBackground,
+        }}
       />
     </label>
   );

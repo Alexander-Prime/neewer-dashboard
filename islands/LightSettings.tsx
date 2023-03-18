@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { useComputed, useSignal } from "@preact/signals";
 
 import { hash } from "~/signals/hash.ts";
@@ -20,6 +20,9 @@ export default ({ className }: Props) => {
   ]);
   const deferredHash = useComputed(() => hash.value || timeoutHash.value);
 
+  const [brightness, setBrightness] = useState(0);
+  const [hue, setHue] = useState(0);
+
   return (
     <div className={classNames("LightSettings", className)}>
       <div
@@ -39,7 +42,30 @@ export default ({ className }: Props) => {
             <Switch label="On / Off" onChange={console.log} />
           </li>
           <li className="LightSettings-card-controls-item">
-            <Slider label="Brightness" onChange={console.log} />
+            <Slider
+              label="Brightness"
+              onInput={setBrightness}
+            />
+          </li>
+          <li className="LightSettings-card-controls-item">
+            <Slider
+              label="Hue"
+              onInput={setHue}
+              fillColor="transparent"
+              trackBackground={`linear-gradient(
+                in hsl increasing hue to right,
+                hsl(0, 100%, ${brightness / 2}%),
+                hsl(359.9999deg, 100%, ${brightness / 2}%)
+              )`}
+            />
+          </li>
+
+          <li className="LightSettings-card-controls-item">
+            <Slider
+              label="Saturation"
+              onChange={console.log}
+              fillColor={`hsl(${hue / 100 * 360}deg, 100%, ${brightness / 2}%)`}
+            />
           </li>
         </ul>
       </div>
