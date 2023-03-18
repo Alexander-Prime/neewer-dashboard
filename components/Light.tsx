@@ -10,7 +10,7 @@ type Props = {
 export default ({ className, id }: Props) => (
   <div
     className={classNames("Light", className)}
-    id={`light-${id}`}
+    id={id}
     style={{
       left: lights.value[id]?.position.x,
       top: lights.value[id]?.position.y,
